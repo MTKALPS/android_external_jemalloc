@@ -1,4 +1,9 @@
 #
+# Copyright (C) 2014 MediaTek Inc.
+# Modification based on code covered by the mentioned copyright
+# and/or permission notice(s).
+#
+#
 # Copyright (C) 2014 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,6 +49,10 @@ jemalloc_common_cflags := \
 #     fragmentation.
 jemalloc_common_cflags += \
 	-DANDROID_LG_TCACHE_MAXCLASS_DEFAULT=16 \
+
+ifeq ($(strip $(MTK_GMO_RAM_OPTIMIZE)), yes)
+MALLOC_SVELTE := true
+endif
 
 ifeq ($(MALLOC_SVELTE),true)
 # Use a single arena on svelte devices to keep the PSS consumption as low
